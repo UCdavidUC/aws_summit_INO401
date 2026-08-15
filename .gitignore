@@ -6,6 +6,7 @@ __pycache__/
 *.ipynb_checkpoints/
 .DS_Store
 .kiro/
+.kiro/hooks/
 
 # CDK (infra/)
 .cdk.staging/
