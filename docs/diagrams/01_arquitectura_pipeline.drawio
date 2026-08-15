@@ -1,0 +1,25 @@
+<mxfile host="app.diagrams.net" agent="kiro" version="24.7.5">
+  <diagram name="Arquitectura del pipeline" id="Arquitectura_del_pipeline">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+<mxCell id="n2" value="CNBV (9 sectores)&#10;normatividad web&#10;-&gt; PDFs directos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=12;" vertex="1" parent="1"><mxGeometry x="40" y="40" width="300" height="90" as="geometry"/></mxCell>
+<mxCell id="n3" value="Banxico (~300 circulares,&#10;indice cronologico)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=12;" vertex="1" parent="1"><mxGeometry x="420" y="40" width="300" height="90" as="geometry"/></mxCell>
+<mxCell id="n4" value="raw/{cnbv,banxico}/&#10;(PDFs + metadata)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="160" y="200" width="440" height="60" as="geometry"/></mxCell>
+<mxCell id="n5" value="processed/text/&#10;(texto limpio por documento)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="160" y="320" width="440" height="60" as="geometry"/></mxCell>
+<mxCell id="n6" value="processed/chunks.jsonl" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="160" y="440" width="440" height="60" as="geometry"/></mxCell>
+<mxCell id="n7" value="dataset/{train,eval}.jsonl&#10;(chat SFT)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="160" y="560" width="440" height="60" as="geometry"/></mxCell>
+<mxCell id="n8" value="models/&lt;job&gt;/&#10;(adaptador LoRA + metricas)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="160" y="680" width="440" height="60" as="geometry"/></mxCell>
+<mxCell id="n9" value="Bedrock AgentCore Runtime (us-west-2)&#10;pruebas end-to-end" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="160" y="800" width="440" height="60" as="geometry"/></mxCell>
+<mxCell id="n10" value="scrape_cnbv.py" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="n2" target="n4"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n11" value="scrape_banxico.py" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="n3" target="n4"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n12" value="extract_text.py (pypdf)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" edge="1" parent="1" source="n4" target="n5"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n13" value="chunk_documents.py" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" edge="1" parent="1" source="n5" target="n6"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n14" value="build_dataset.py (Bedrock: Claude Haiku 4.5)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" edge="1" parent="1" source="n6" target="n7"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n15" value="SageMaker Training Job (QLoRA, ml.g6.2xlarge)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" edge="1" parent="1" source="n7" target="n8"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n16" value="imagen ARM64 + agentcore.Runtime (CDK)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" edge="1" parent="1" source="n8" target="n9"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

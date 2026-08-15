@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "GitHub Commit Sync",
+      "trigger": "Stop",
+      "action": {
+        "type": "agent",
+        "prompt": "This Hook allows Kiro to add modified files or newly created files to a commit, commits must be aligned to those changes, also creates push to the corresponding branch, for example, if not related to features just push into existing branch. Otherwise, you can create feature branches or fix branches accordingly."
+      },
+      "description": "This Hook allows Kiro to add modified files or newly created files to a commit, commits must be aligned to those changes, also creates push to the corresponding branch, for example, if not related to features just push into existing branch. Otherwise, you can create feature branches or fix branches accordingly.",
+      "enabled": true
+    }
+  ]
+}

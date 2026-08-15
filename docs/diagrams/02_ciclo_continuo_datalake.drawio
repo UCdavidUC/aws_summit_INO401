@@ -1,0 +1,33 @@
+<mxfile host="app.diagrams.net" agent="kiro" version="24.7.5">
+  <diagram name="Ciclo continuo end-to-end" id="Ciclo_continuo_end-to-end">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+<mxCell id="n2" value="EventBridge&#10;cada domingo 02:00 (CDMX)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="320" y="30" width="260" height="60" as="geometry"/></mxCell>
+<mxCell id="n3" value="Sincronizacion&#10;(ECS Fargate)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=12;" vertex="1" parent="1"><mxGeometry x="320" y="140" width="260" height="60" as="geometry"/></mxCell>
+<mxCell id="n4" value="raw/{cnbv,banxico}/&#10;(nuevo/actualizado)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="620" y="140" width="260" height="60" as="geometry"/></mxCell>
+<mxCell id="n5" value="Catalogo DynamoDB&#10;finance_document_catalog&#10;(doc_id, s3_version_id, status)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="320" y="250" width="260" height="80" as="geometry"/></mxCell>
+<mxCell id="n6" value="any_changes&#10;== true?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=12;" vertex="1" parent="1"><mxGeometry x="340" y="380" width="220" height="90" as="geometry"/></mxCell>
+<mxCell id="n7" value="Fin de la corrida&#10;(sin cambios)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=12;fontStyle=2;" vertex="1" parent="1"><mxGeometry x="620" y="400" width="220" height="60" as="geometry"/></mxCell>
+<mxCell id="n8" value="Preparacion de datos&#10;processed/text/, processed/chunks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=12;" vertex="1" parent="1"><mxGeometry x="320" y="520" width="260" height="60" as="geometry"/></mxCell>
+<mxCell id="n9" value="Nuevo snapshot del dataset&#10;(build_dataset.py, Bedrock)&#10;datasets/&lt;job-name&gt;/{train,eval}.jsonl" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="320" y="620" width="260" height="80" as="geometry"/></mxCell>
+<mxCell id="n10" value="SageMaker Training Job&#10;(QLoRA, ml.g6.2xlarge)&#10;models/&lt;job-name&gt;/ + metrics.json" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="320" y="740" width="260" height="80" as="geometry"/></mxCell>
+<mxCell id="n11" value="eval_loss mejora&#10;vs. models/latest?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=12;" vertex="1" parent="1"><mxGeometry x="340" y="860" width="220" height="90" as="geometry"/></mxCell>
+<mxCell id="n12" value="Promover: copiar a models/latest/&#10;-&gt; AgentCore lo recoge en el&#10;siguiente cold start" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=12;fontStyle=2;" vertex="1" parent="1"><mxGeometry x="40" y="1000" width="260" height="90" as="geometry"/></mxCell>
+<mxCell id="n13" value="Conservar el adaptador actual;&#10;el nuevo queda en models/&lt;job-name&gt;/&#10;para analisis, sin desplegarse" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=12;fontStyle=2;" vertex="1" parent="1"><mxGeometry x="620" y="1000" width="260" height="90" as="geometry"/></mxCell>
+<mxCell id="n14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" edge="1" parent="1" source="n2" target="n3"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n15" value="diff contra estado&#10;conocido (HEAD+SHA256)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" edge="1" parent="1" source="n3" target="n4"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" edge="1" parent="1" source="n3" target="n5"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" edge="1" parent="1" source="n5" target="n6"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n18" value="si" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="n6" target="n8"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n19" value="no" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="n6" target="n7"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" edge="1" parent="1" source="n8" target="n9"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" edge="1" parent="1" source="n9" target="n10"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" edge="1" parent="1" source="n10" target="n11"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n23" value="si" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="n11" target="n12"><mxGeometry relative="1" as="geometry"/></mxCell>
+<mxCell id="n24" value="no" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="n11" target="n13"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

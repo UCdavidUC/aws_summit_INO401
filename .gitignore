@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.env
+*.ipynb_checkpoints/
+.DS_Store
+
+# CDK (infra/)
+.cdk.staging/
+cdk.out/
+.pytest_cache/
+*.swp
+
+# data_pipeline/: generated artifacts (scraped PDFs, extracted text,
+# chunks, generated dataset). Reproducible via scrape_cnbv.py,
+# scrape_banxico.py, extract_text.py, chunk_documents.py, build_dataset.py.
+data_pipeline/raw_cnbv/
+data_pipeline/raw_banxico/
+data_pipeline/raw/
+data_pipeline/processed/
+
+# Runtime/execution artifacts
+execution.sh
+training/_adapters_eval/
